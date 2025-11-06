@@ -1,0 +1,9 @@
+
+How to read the “volume” column (so you can compare apples to apples)
+Listen Score (LS) is Listen Notes’ popularity index (0–100). Global Rank is the percentile vs. ~3.6M podcasts (e.g., “Top 3%”). It’s a solid directional proxy when exact downloads aren’t public. (Listen Notes)
+Apple ratings count is another reality check. It’s not equal to monthly listeners, but it reflects audience size/engagement on that platform. (Apple Podcasts)
+
+Quick takeaways for your planning
+Weekly, interview-driven formats (e.g., ChatEDU, AI in Education Podcast) are pulling solid LS and percentile ranks—useful benchmarks if you’re targeting broad K-12 leadership and teacher audiences. (Listen Notes)
+Short daily briefs (AI for Educators Daily) earn consistent engagement via frequency + utility—this is the clearest lane if your brand wants habitual, high-touch reach. (Apple Podcasts)
+District/system strategy shows (ALP, NYSCATE’s Generative Age) fill a leadership niche—good models if you plan to court superintendents, CTOs, and policy folks. (ALP)
