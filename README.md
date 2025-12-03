@@ -143,3 +143,11 @@ All rights reserved.
 ---
 
 *Last Updated: November 10, 2025*
+
+## Status
+Active
+
+## TODO
+- [ ] Update presentation materials
+- [ ] Add new case studies
+- [ ] Create workshop materials
