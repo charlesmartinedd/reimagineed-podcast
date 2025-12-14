@@ -815,6 +815,57 @@
             color: var(--white);
         }
 
+        /* Scroll Arrow */
+        .scroll-arrow {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .scroll-arrow:hover {
+            transform: translateX(-50%) translateY(-5px);
+        }
+
+        .scroll-arrow span {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gray-400);
+            font-weight: 500;
+        }
+
+        .scroll-arrow svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--electric-blue);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(8px);
+            }
+            60% {
+                transform: translateY(4px);
+            }
+        }
+
+        .scroll-arrow:hover svg {
+            stroke: var(--gold);
+        }
+
         /* Responsive */
         @media (max-width: 1200px) {
             .episodes-grid {
@@ -945,6 +996,13 @@
                 </div>
             </div>
         </div>
+
+        <a href="#about" class="scroll-arrow">
+            <span>Scroll</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+            </svg>
+        </a>
     </section>
 
     <!-- About Section -->
@@ -1007,6 +1065,13 @@
                 </div>
             </div>
         </div>
+
+        <a href="#episodes" class="scroll-arrow">
+            <span>Scroll</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+            </svg>
+        </a>
     </section>
 
     <!-- Episodes Section -->
@@ -1102,6 +1167,13 @@
                 <p>Reflect, summarize, and set the stage for Season 2. The ReimagineED movement continues.</p>
             </div>
         </div>
+
+        <a href="#hosts" class="scroll-arrow">
+            <span>Scroll</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+            </svg>
+        </a>
     </section>
 
     <!-- Hosts Section -->
