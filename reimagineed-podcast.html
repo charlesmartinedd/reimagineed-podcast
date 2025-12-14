@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReimagineED | The Disruptor in AI Education</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0B1D3A;
+            --navy-light: #132847;
+            --gold: #FFD33A;
+            --electric-blue: #00D9FF;
+            --purple: #7B2FFF;
+            --coral: #FF6B6B;
+            --charcoal: #333333;
+            --white: #FFFFFF;
+            --gray-100: #F8F9FA;
+            --gray-200: #E9ECEF;
+            --gray-400: #ADB5BD;
+            --gradient-primary: linear-gradient(135deg, #0B1D3A 0%, #132847 50%, #1a3a5c 100%);
+            --gradient-accent: linear-gradient(135deg, #7B2FFF 0%, #00D9FF 100%);
+            --gradient-gold: linear-gradient(135deg, #FFD33A 0%, #FFC107 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        .app {
+            height: 100vh;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+            background: rgba(11, 29, 58, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--gray-200);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--electric-blue);
+        }
+
+        .nav-cta {
+            background: var(--gradient-gold);
+            color: var(--navy) !important;
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(255, 211, 58, 0.3);
+        }
+
+        /* Main Content */
+        main {
+            display: grid;
+            grid-template-columns: 42% 58%;
+            gap: 3rem;
+            padding: 2rem 3rem;
+            overflow: hidden;
+            background: var(--gradient-primary);
+            position: relative;
+        }
+
+        main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(123, 47, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 217, 255, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Left Panel - Hero */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 217, 255, 0.1);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            padding: 0.4rem 0.9rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--electric-blue);
+            width: fit-content;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--electric-blue);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+        }
+
+        .hero .tagline {
+            font-size: 1.125rem;
+            color: var(--gray-400);
+            font-weight: 400;
+            margin-bottom: 2rem;
+            letter-spacing: 0.02em;
+        }
+
+        /* Audio Player */
+        .audio-player {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .audio-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .audio-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .audio-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--white);
+        }
+
+        .audio-info h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+        }
+
+        .audio-info p {
+            font-size: 0.75rem;
+            color: var(--gray-400);
+        }
+
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .play-btn {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-gold);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 24px rgba(255, 211, 58, 0.4);
+        }
+
+        .play-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--navy);
+            margin-left: 2px;
+        }
+
+        .play-btn.playing svg {
+            margin-left: 0;
+        }
+
+        .progress-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--electric-blue);
+            border-radius: 2px;
+            transition: width 0.1s linear;
+        }
+
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--gray-400);
+            font-family: 'Inter', monospace;
+        }
+
+        /* Subscribe Buttons */
+        .subscribe-section h4 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-400);
+            margin-bottom: 0.75rem;
+        }
+
+        .subscribe-btns {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .subscribe-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .subscribe-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--electric-blue);
+            transform: translateY(-1px);
+        }
+
+        .subscribe-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Right Panel - Episodes */
+        .episodes-panel {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .panel-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .panel-header .season-tag {
+            font-size: 0.75rem;
+            color: var(--electric-blue);
+            background: rgba(0, 217, 255, 0.1);
+            padding: 0.3rem 0.75rem;
+            border-radius: 100px;
+        }
+
+        .episodes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        .episodes-grid::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .episodes-grid::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 2px;
+        }
+
+        .episodes-grid::-webkit-scrollbar-thumb {
+            background: rgba(0, 217, 255, 0.3);
+            border-radius: 2px;
+        }
+
+        .episode-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .episode-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-accent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .episode-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(0, 217, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .episode-card:hover::before {
+            opacity: 1;
+        }
+
+        .episode-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--electric-blue);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .episode-status {
+            font-size: 0.6rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 100px;
+            font-weight: 500;
+        }
+
+        .status-pilot {
+            background: var(--gradient-gold);
+            color: var(--navy);
+        }
+
+        .status-coming {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--gray-400);
+        }
+
+        .episode-card h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .episode-card p {
+            font-size: 0.75rem;
+            color: var(--gray-400);
+            line-height: 1.5;
+        }
+
+        .episode-format {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.65rem;
+            color: var(--purple);
+            margin-top: 0.75rem;
+            background: rgba(123, 47, 255, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        /* Footer */
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+            background: rgba(11, 29, 58, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0, 217, 255, 0.1);
+        }
+
+        .hosts {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .host {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .host-avatar {
+            width: 36px;
+            height: 36px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .host-info {
+            font-size: 0.8rem;
+        }
+
+        .host-info strong {
+            display: block;
+            font-weight: 600;
+        }
+
+        .host-info span {
+            color: var(--gray-400);
+            font-size: 0.7rem;
+        }
+
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .social-links a {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .social-links a:hover {
+            background: var(--electric-blue);
+        }
+
+        .social-links svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--white);
+        }
+
+        .branding {
+            font-size: 0.7rem;
+            color: var(--gray-400);
+        }
+
+        .branding strong {
+            color: var(--white);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            main {
+                grid-template-columns: 1fr;
+                overflow-y: auto;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .episodes-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header, main, footer {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            .episodes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hosts {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <header>
+            <div class="logo">REIMAGINE<span>ED</span></div>
+            <nav>
+                <a href="#episodes">Episodes</a>
+                <a href="#about">About</a>
+                <a href="#hosts">Hosts</a>
+                <a href="#subscribe" class="nav-cta">Subscribe</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="hero-badge">New Podcast</div>
+                <h1>REIMAGINE<span>ED</span></h1>
+                <p class="tagline">The Disruptor in AI Education</p>
+
+                <div class="audio-player">
+                    <div class="audio-header">
+                        <div class="audio-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                        </div>
+                        <div class="audio-info">
+                            <h3>Sample Episode Preview</h3>
+                            <p>AI + Workforce Development</p>
+                        </div>
+                    </div>
+                    <div class="audio-controls">
+                        <button class="play-btn" id="playBtn" aria-label="Play">
+                            <svg viewBox="0 0 24 24" id="playIcon"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                        <div class="progress-container">
+                            <div class="progress-bar" id="progressBar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <div class="time-display">
+                                <span id="currentTime">0:00</span>
+                                <span id="duration">0:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subscribe-section">
+                    <h4>Listen on</h4>
+                    <div class="subscribe-btns">
+                        <a href="#" class="subscribe-btn">
+                            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M5.34 0A5.328 5.328 0 000 5.34v13.32A5.328 5.328 0 005.34 24h13.32A5.328 5.328 0 0024 18.66V5.34A5.328 5.328 0 0018.66 0H5.34zm6.525 5.64c3.886 0 6.14 2.18 6.14 6.32v.14h-2.79v-.14c0-2.54-1.32-3.78-3.35-3.78s-3.26 1.31-3.26 3.44c0 4.69 9.54 3.03 9.54 9.77 0 3.39-2.37 5.96-6.17 5.96-4.03 0-6.48-2.54-6.48-6.7v-.26h2.79v.26c0 2.72 1.53 4.16 3.69 4.16 2.18 0 3.38-1.37 3.38-3.35 0-5.08-9.54-3.36-9.54-9.89 0-3.64 2.54-5.95 6.08-5.95z"/></svg>
+                            Spotify
+                        </a>
+                        <a href="#" class="subscribe-btn">
+                            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+                            Apple
+                        </a>
+                        <a href="#" class="subscribe-btn">
+                            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm4.95 17.52l-5.99-3.5c-.19-.11-.31-.32-.31-.54V6.62c0-.33.27-.6.6-.6s.6.27.6.6v6.49l5.64 3.3c.29.17.39.54.22.83-.17.29-.54.39-.83.22l.07.06z"/></svg>
+                            Google
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="episodes-panel">
+                <div class="panel-header">
+                    <h2>Season 1 Episodes</h2>
+                    <span class="season-tag">8 Episodes</span>
+                </div>
+                <div class="episodes-grid">
+                    <div class="episode-card">
+                        <div class="episode-number">
+                            EP 01
+                            <span class="episode-status status-pilot">PILOT</span>
+                        </div>
+                        <h3>AI + Workforce Development</h3>
+                        <p>What's changing in the workforce and why educators must adapt to prepare students.</p>
+                        <span class="episode-format">Co-hosted Discussion</span>
+                    </div>
+                    <div class="episode-card">
+                        <div class="episode-number">
+                            EP 02
+                            <span class="episode-status status-coming">COMING</span>
+                        </div>
+                        <h3>AI Literacy for Every Student</h3>
+                        <p>Practical classroom tools and prompting basics for K-12 educators.</p>
+                        <span class="episode-format">Co-hosted + Guest</span>
+                    </div>
+                    <div class="episode-card">
+                        <div class="episode-number">
+                            EP 03
+                            <span class="episode-status status-coming">COMING</span>
+                        </div>
+                        <h3>AI + Equity: Who Gets Left Behind?</h3>
+                        <p>Bias, access gaps, and Global Majority perspectives in AI education.</p>
+                        <span class="episode-format">Deep Dive</span>
+                    </div>
+                    <div class="episode-card">
+                        <div class="episode-number">
+                            EP 04
+                            <span class="episode-status status-coming">COMING</span>
+                        </div>
+                        <h3>A Superintendent's AI Strategy</h3>
+                        <p>Real-world K-12 implementation stories from district leadership.</p>
+                        <span class="episode-format">Guest Interview</span>
+                    </div>
+                    <div class="episode-card">
+                        <div class="episode-number">
+                            EP 05
+                            <span class="episode-status status-coming">COMING</span>
+                        </div>
+                        <h3>National Education Policy + AI</h3>
+                        <p>What's happening at federal and state levels for AI in schools.</p>
+                        <span class="episode-format">Co-hosted Analysis</span>
+                    </div>
+                    <div class="episode-card">
+                        <div class="episode-number">
+                            EP 06
+                            <span class="episode-status status-coming">COMING</span>
+                        </div>
+                        <h3>AI + the African American Community</h3>
+                        <p>Implications, opportunities, and concerns for communities of color.</p>
+                        <span class="episode-format">Community Voice</span>
+                    </div>
+                    <div class="episode-card">
+                        <div class="episode-number">
+                            EP 07
+                            <span class="episode-status status-coming">COMING</span>
+                        </div>
+                        <h3>Global Education: What Others Are Doing</h3>
+                        <p>International comparisons and lessons from around the world.</p>
+                        <span class="episode-format">Research Share</span>
+                    </div>
+                    <div class="episode-card">
+                        <div class="episode-number">
+                            EP 08
+                            <span class="episode-status status-coming">COMING</span>
+                        </div>
+                        <h3>The ReimagineED Vision</h3>
+                        <p>Season finale: Where we go from here and call to action.</p>
+                        <span class="episode-format">Reflection</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="hosts">
+                <div class="host">
+                    <div class="host-avatar">WG</div>
+                    <div class="host-info">
+                        <strong>Dr. William Gideon</strong>
+                        <span>Co-Host</span>
+                    </div>
+                </div>
+                <div class="host">
+                    <div class="host-avatar">MM</div>
+                    <div class="host-info">
+                        <strong>Dr. Marie Martin</strong>
+                        <span>Co-Host</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                    </a>
+                    <a href="#" aria-label="X/Twitter">
+                        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+                    </a>
+                </div>
+                <div class="branding">
+                    A <strong>The Right Path</strong> Production
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <audio id="audioPlayer" preload="metadata">
+        <source src="assets/TheRightPath_Episode_Mixed.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const audio = document.getElementById('audioPlayer');
+        const playBtn = document.getElementById('playBtn');
+        const playIcon = document.getElementById('playIcon');
+        const progressBar = document.getElementById('progressBar');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            durationEl.textContent = formatTime(audio.duration);
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressFill.style.width = `${progress}%`;
+            currentTimeEl.textContent = formatTime(audio.currentTime);
+        });
+
+        audio.addEventListener('ended', () => {
+            playBtn.classList.remove('playing');
+            playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+        });
+
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playBtn.classList.add('playing');
+                playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+            } else {
+                audio.pause();
+                playBtn.classList.remove('playing');
+                playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+            }
+        });
+
+        progressBar.addEventListener('click', (e) => {
+            const rect = progressBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = percent * audio.duration;
+        });
+
+        // Episode card interactions
+        document.querySelectorAll('.episode-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const title = this.querySelector('h3').textContent;
+                const status = this.querySelector('.episode-status');
+                if (status && status.classList.contains('status-pilot')) {
+                    if (audio.paused) {
+                        audio.play();
+                        playBtn.classList.add('playing');
+                        playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
