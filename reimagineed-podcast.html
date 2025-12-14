@@ -11,7 +11,9 @@
         :root {
             --navy: #0B1D3A;
             --navy-light: #132847;
+            --navy-dark: #071428;
             --gold: #FFD33A;
+            --gold-dim: rgba(255, 211, 58, 0.15);
             --electric-blue: #00D9FF;
             --purple: #7B2FFF;
             --coral: #FF6B6B;
@@ -20,9 +22,11 @@
             --gray-100: #F8F9FA;
             --gray-200: #E9ECEF;
             --gray-400: #ADB5BD;
+            --gray-600: #6C757D;
             --gradient-primary: linear-gradient(135deg, #0B1D3A 0%, #132847 50%, #1a3a5c 100%);
             --gradient-accent: linear-gradient(135deg, #7B2FFF 0%, #00D9FF 100%);
             --gradient-gold: linear-gradient(135deg, #FFD33A 0%, #FFC107 100%);
+            --gradient-warm: linear-gradient(135deg, #FF6B6B 0%, #FFD33A 100%);
         }
 
         * {
@@ -31,22 +35,24 @@
             box-sizing: border-box;
         }
 
-        html, body {
-            height: 100vh;
-            overflow: hidden;
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--navy);
             color: var(--white);
+            line-height: 1.6;
         }
 
-        .app {
-            height: 100vh;
-            display: grid;
-            grid-template-rows: auto 1fr auto;
-        }
-
-        /* Header */
+        /* Header - Fixed */
         header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -98,18 +104,35 @@
             box-shadow: 0 4px 20px rgba(255, 211, 58, 0.3);
         }
 
-        /* Main Content */
-        main {
-            display: grid;
-            grid-template-columns: 42% 58%;
-            gap: 3rem;
-            padding: 2rem 3rem;
-            overflow: hidden;
-            background: var(--gradient-primary);
+        /* Sections */
+        section {
+            padding: 6rem 3rem;
             position: relative;
         }
 
-        main::before {
+        .section-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--electric-blue);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding-top: 8rem;
+            background: var(--gradient-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
             content: '';
             position: absolute;
             top: 0;
@@ -117,16 +140,13 @@
             right: 0;
             bottom: 0;
             background:
-                radial-gradient(circle at 20% 80%, rgba(123, 47, 255, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 217, 255, 0.06) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(123, 47, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 217, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 211, 58, 0.03) 0%, transparent 70%);
             pointer-events: none;
         }
 
-        /* Left Panel - Hero */
-        .hero {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        .hero-content {
             position: relative;
             z-index: 1;
         }
@@ -160,67 +180,141 @@
             50% { opacity: 0.4; }
         }
 
-        .hero h1 {
+        .hero-content h1 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 700;
             letter-spacing: -0.03em;
             line-height: 1.1;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
         }
 
-        .hero h1 span {
+        .hero-content h1 span {
             color: var(--gold);
         }
 
-        .hero .tagline {
-            font-size: 1.125rem;
+        .hero-content .tagline {
+            font-size: 1.25rem;
             color: var(--gray-400);
             font-weight: 400;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             letter-spacing: 0.02em;
         }
 
-        /* Audio Player */
+        .hero-content .positioning {
+            font-size: 0.95rem;
+            color: var(--gray-200);
+            max-width: 480px;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        /* POV Pillars */
+        .pov-pillars {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .pov-pill {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pov-pill.policy { color: var(--electric-blue); border-color: rgba(0, 217, 255, 0.3); }
+        .pov-pill.leadership { color: var(--purple); border-color: rgba(123, 47, 255, 0.3); }
+        .pov-pill.parents { color: var(--gold); border-color: rgba(255, 211, 58, 0.3); }
+        .pov-pill.industry { color: var(--coral); border-color: rgba(255, 107, 107, 0.3); }
+
+        /* Subscribe Buttons */
+        .subscribe-btns {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .subscribe-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.25rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .subscribe-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--electric-blue);
+            transform: translateY(-1px);
+        }
+
+        .subscribe-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Hero Right - Audio Player + Format */
+        .hero-right {
+            position: relative;
+            z-index: 1;
+        }
+
         .audio-player {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
-            padding: 1.25rem 1.5rem;
-            margin-bottom: 2rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .audio-header {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
         }
 
         .audio-icon {
-            width: 40px;
-            height: 40px;
+            width: 48px;
+            height: 48px;
             background: var(--gradient-accent);
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
         .audio-icon svg {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             fill: var(--white);
         }
 
         .audio-info h3 {
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 0.15rem;
+            margin-bottom: 0.2rem;
         }
 
         .audio-info p {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: var(--gray-400);
         }
 
@@ -231,8 +325,8 @@
         }
 
         .play-btn {
-            width: 48px;
-            height: 48px;
+            width: 52px;
+            height: 52px;
             background: var(--gradient-gold);
             border: none;
             border-radius: 50%;
@@ -250,8 +344,8 @@
         }
 
         .play-btn svg {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             fill: var(--navy);
             margin-left: 2px;
         }
@@ -268,9 +362,9 @@
         }
 
         .progress-bar {
-            height: 4px;
+            height: 6px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
+            border-radius: 3px;
             cursor: pointer;
             position: relative;
             overflow: hidden;
@@ -280,116 +374,208 @@
             height: 100%;
             width: 0%;
             background: var(--electric-blue);
-            border-radius: 2px;
+            border-radius: 3px;
             transition: width 0.1s linear;
         }
 
         .time-display {
             display: flex;
             justify-content: space-between;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: var(--gray-400);
             font-family: 'Inter', monospace;
         }
 
-        /* Subscribe Buttons */
-        .subscribe-section h4 {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--gray-400);
-            margin-bottom: 0.75rem;
+        /* Format Breakdown */
+        .format-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 1.5rem;
         }
 
-        .subscribe-btns {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .subscribe-btn {
+        .format-card h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.6rem 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: var(--white);
-            font-size: 0.8rem;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.2s;
         }
 
-        .subscribe-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--electric-blue);
-            transform: translateY(-1px);
+        .format-card h4 span {
+            font-size: 0.7rem;
+            color: var(--gray-400);
+            font-weight: 400;
         }
 
-        .subscribe-btn svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        /* Right Panel - Episodes */
-        .episodes-panel {
+        .format-segments {
             display: flex;
-            flex-direction: column;
-            position: relative;
-            z-index: 1;
+            gap: 0.5rem;
         }
 
-        .panel-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.25rem;
+        .format-segment {
+            flex: 1;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
         }
 
-        .panel-header h2 {
+        .format-segment.educate {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.15) 0%, rgba(0, 217, 255, 0.05) 100%);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+        }
+
+        .format-segment.employ {
+            background: linear-gradient(135deg, rgba(123, 47, 255, 0.15) 0%, rgba(123, 47, 255, 0.05) 100%);
+            border: 1px solid rgba(123, 47, 255, 0.2);
+        }
+
+        .format-segment.empower {
+            background: linear-gradient(135deg, rgba(255, 211, 58, 0.15) 0%, rgba(255, 211, 58, 0.05) 100%);
+            border: 1px solid rgba(255, 211, 58, 0.2);
+        }
+
+        .format-segment .time {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-400);
+            margin-bottom: 0.25rem;
+        }
+
+        .format-segment .label {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.25rem;
+            font-size: 0.9rem;
             font-weight: 600;
         }
 
-        .panel-header .season-tag {
-            font-size: 0.75rem;
+        .format-segment.educate .label { color: var(--electric-blue); }
+        .format-segment.employ .label { color: var(--purple); }
+        .format-segment.empower .label { color: var(--gold); }
+
+        /* About Section */
+        .about-section {
+            background: var(--navy-dark);
+            border-top: 1px solid rgba(0, 217, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .about-content p {
+            color: var(--gray-200);
+            margin-bottom: 1.25rem;
+            font-size: 0.95rem;
+        }
+
+        .about-content .highlight {
             color: var(--electric-blue);
+            font-weight: 500;
+        }
+
+        /* Principles List */
+        .principles-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .principle {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .principle-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--gradient-accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1rem;
+        }
+
+        .principle-text h5 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .principle-text p {
+            font-size: 0.8rem;
+            color: var(--gray-400);
+            margin: 0;
+        }
+
+        /* Episodes Section */
+        .episodes-section {
+            background: var(--gradient-primary);
+        }
+
+        .episodes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 2rem;
+        }
+
+        .episodes-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .season-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             background: rgba(0, 217, 255, 0.1);
-            padding: 0.3rem 0.75rem;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            padding: 0.5rem 1rem;
             border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--electric-blue);
         }
 
         .episodes-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            flex: 1;
-            overflow-y: auto;
-            padding-right: 0.5rem;
-        }
-
-        .episodes-grid::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .episodes-grid::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 2px;
-        }
-
-        .episodes-grid::-webkit-scrollbar-thumb {
-            background: rgba(0, 217, 255, 0.3);
-            border-radius: 2px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .episode-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            padding: 1.25rem;
+            border-radius: 14px;
+            padding: 1.5rem;
             transition: all 0.3s;
             cursor: pointer;
             position: relative;
@@ -411,11 +597,18 @@
         .episode-card:hover {
             background: rgba(255, 255, 255, 0.06);
             border-color: rgba(0, 217, 255, 0.2);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
 
         .episode-card:hover::before {
             opacity: 1;
+        }
+
+        .episode-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
         }
 
         .episode-number {
@@ -423,17 +616,15 @@
             font-size: 0.7rem;
             font-weight: 600;
             color: var(--electric-blue);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
         .episode-status {
             font-size: 0.6rem;
-            padding: 0.15rem 0.5rem;
+            padding: 0.2rem 0.5rem;
             border-radius: 100px;
-            font-weight: 500;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .status-pilot {
@@ -450,25 +641,95 @@
             font-size: 0.95rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
-            line-height: 1.3;
+            line-height: 1.35;
+        }
+
+        .episode-card .guest {
+            font-size: 0.75rem;
+            color: var(--purple);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
         }
 
         .episode-card p {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: var(--gray-400);
             line-height: 1.5;
         }
 
-        .episode-format {
-            display: inline-flex;
+        /* Hosts Section */
+        .hosts-section {
+            background: var(--navy-dark);
+            border-top: 1px solid rgba(0, 217, 255, 0.1);
+        }
+
+        .hosts-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hosts-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .hosts-header p {
+            color: var(--gray-400);
+            font-size: 0.95rem;
+        }
+
+        .hosts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .host-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .host-avatar {
+            width: 72px;
+            height: 72px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
             align-items: center;
-            gap: 0.3rem;
-            font-size: 0.65rem;
-            color: var(--purple);
-            margin-top: 0.75rem;
-            background: rgba(123, 47, 255, 0.1);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .host-info h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .host-info .role {
+            font-size: 0.8rem;
+            color: var(--electric-blue);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .host-info p {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            line-height: 1.6;
         }
 
         /* Footer */
@@ -476,54 +737,47 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 3rem;
-            background: rgba(11, 29, 58, 0.95);
-            backdrop-filter: blur(20px);
+            padding: 1.5rem 3rem;
+            background: var(--navy);
             border-top: 1px solid rgba(0, 217, 255, 0.1);
         }
 
-        .hosts {
+        .footer-left {
             display: flex;
             align-items: center;
             gap: 2rem;
         }
 
-        .host {
+        .footer-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .footer-logo span {
+            color: var(--gold);
+        }
+
+        .footer-links {
             display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            gap: 1.5rem;
         }
 
-        .host-avatar {
-            width: 36px;
-            height: 36px;
-            background: var(--gradient-accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.8rem;
-        }
-
-        .host-info {
-            font-size: 0.8rem;
-        }
-
-        .host-info strong {
-            display: block;
-            font-weight: 600;
-        }
-
-        .host-info span {
+        .footer-links a {
             color: var(--gray-400);
-            font-size: 0.7rem;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--electric-blue);
         }
 
         .footer-right {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .social-links {
@@ -532,10 +786,10 @@
         }
 
         .social-links a {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 6px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -547,13 +801,13 @@
         }
 
         .social-links svg {
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             fill: var(--white);
         }
 
         .branding {
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             color: var(--gray-400);
         }
 
@@ -563,227 +817,353 @@
 
         /* Responsive */
         @media (max-width: 1200px) {
-            main {
-                grid-template-columns: 1fr;
-                overflow-y: auto;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
             .episodes-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
+        @media (max-width: 992px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hosts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
-            header, main, footer {
-                padding-left: 1.5rem;
-                padding-right: 1.5rem;
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            header {
+                padding: 1rem 1.5rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .format-segments {
+                flex-direction: column;
             }
 
             .episodes-grid {
                 grid-template-columns: 1fr;
             }
 
-            .hosts {
-                flex-direction: column;
-                gap: 1rem;
-                align-items: flex-start;
+            nav {
+                display: none;
             }
 
             footer {
                 flex-direction: column;
                 gap: 1.5rem;
+                padding: 1.5rem;
             }
 
-            nav {
-                display: none;
+            .footer-left, .footer-right {
+                flex-direction: column;
+                gap: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="app">
-        <header>
-            <div class="logo">REIMAGINE<span>ED</span></div>
-            <nav>
-                <a href="#episodes">Episodes</a>
+    <header>
+        <div class="logo">REIMAGINE<span>ED</span></div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#episodes">Episodes</a>
+            <a href="#hosts">Hosts</a>
+            <a href="#subscribe" class="nav-cta">Subscribe</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">Season 1 Now Available</div>
+            <h1>REIMAGINE<span>ED</span></h1>
+            <p class="tagline">The Disruptor in AI Education</p>
+            <p class="positioning">A leadership resource for understanding how AI, workforce shifts, and community development intersect with the future of schools. We center humanity and equity—making AI adoption a tool for removing barriers and creating opportunity.</p>
+
+            <div class="pov-pillars">
+                <span class="pov-pill policy">Policy</span>
+                <span class="pov-pill leadership">Leadership</span>
+                <span class="pov-pill parents">Parents</span>
+                <span class="pov-pill industry">Industry</span>
+            </div>
+
+            <div class="subscribe-btns" id="subscribe">
+                <a href="#" class="subscribe-btn">
+                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M5.34 0A5.328 5.328 0 000 5.34v13.32A5.328 5.328 0 005.34 24h13.32A5.328 5.328 0 0024 18.66V5.34A5.328 5.328 0 0018.66 0H5.34zm6.525 5.64c3.886 0 6.14 2.18 6.14 6.32v.14h-2.79v-.14c0-2.54-1.32-3.78-3.35-3.78s-3.26 1.31-3.26 3.44c0 4.69 9.54 3.03 9.54 9.77 0 3.39-2.37 5.96-6.17 5.96-4.03 0-6.48-2.54-6.48-6.7v-.26h2.79v.26c0 2.72 1.53 4.16 3.69 4.16 2.18 0 3.38-1.37 3.38-3.35 0-5.08-9.54-3.36-9.54-9.89 0-3.64 2.54-5.95 6.08-5.95z"/></svg>
+                    Spotify
+                </a>
+                <a href="#" class="subscribe-btn">
+                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+                    Apple Podcasts
+                </a>
+                <a href="#" class="subscribe-btn">
+                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm4.95 17.52l-5.99-3.5c-.19-.11-.31-.32-.31-.54V6.62c0-.33.27-.6.6-.6s.6.27.6.6v6.49l5.64 3.3c.29.17.39.54.22.83-.17.29-.54.39-.83.22l.07.06z"/></svg>
+                    Google
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-right">
+            <div class="audio-player">
+                <div class="audio-header">
+                    <div class="audio-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                    </div>
+                    <div class="audio-info">
+                        <h3>Episode 1: The Future Is Now</h3>
+                        <p>Why AI Matters for Every Educator</p>
+                    </div>
+                </div>
+                <div class="audio-controls">
+                    <button class="play-btn" id="playBtn" aria-label="Play">
+                        <svg viewBox="0 0 24 24" id="playIcon"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="time-display">
+                            <span id="currentTime">0:00</span>
+                            <span id="duration">45:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="format-card">
+                <h4>Episode Format <span>45 minutes</span></h4>
+                <div class="format-segments">
+                    <div class="format-segment educate">
+                        <div class="time">0:00 - 15:00</div>
+                        <div class="label">Educate</div>
+                    </div>
+                    <div class="format-segment employ">
+                        <div class="time">15:00 - 30:00</div>
+                        <div class="label">Employ</div>
+                    </div>
+                    <div class="format-segment empower">
+                        <div class="time">30:00 - 45:00</div>
+                        <div class="label">Empower</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="about-grid">
+            <div class="about-content">
+                <div class="section-label">About the Show</div>
+                <h2>For Leaders Who Want an Edge in AI and Innovation</h2>
+                <p>ReimagineED is designed for <span class="highlight">district superintendents, principals, education innovators, policymakers, and community changemakers</span> who want to understand how AI reshapes schools, workforce, and communities.</p>
+                <p>This isn't "teacher tips" or one-note interviews. We model the tensions of innovation—sometimes agreeing, sometimes challenging each other. We draw lines between education, urban development, entrepreneurial thinking, and the future workforce.</p>
+                <p>Inspired by the legacy of <span class="highlight">Tony Brown's Journal</span>, we fill an underserved gap: amplifying voices missing from the AI conversation—teachers, parents, students, and workforce leaders in marginalized communities.</p>
+            </div>
+
+            <div class="principles-list">
+                <div class="principle">
+                    <div class="principle-icon">🎯</div>
+                    <div class="principle-text">
+                        <h5>Fill the Gap</h5>
+                        <p>Spotlight equity in AI and amplify underrepresented voices in every episode.</p>
+                    </div>
+                </div>
+                <div class="principle">
+                    <div class="principle-icon">🎙️</div>
+                    <div class="principle-text">
+                        <h5>Authentic Leadership</h5>
+                        <p>Unapologetically authoritative hosts who center humanity and challenge status quo.</p>
+                    </div>
+                </div>
+                <div class="principle">
+                    <div class="principle-icon">📚</div>
+                    <div class="principle-text">
+                        <h5>Depth Over Width</h5>
+                        <p>Thematic mini-series (AI & Equity, Workforce Futures) create continuity and repeat listeners.</p>
+                    </div>
+                </div>
+                <div class="principle">
+                    <div class="principle-icon">🤝</div>
+                    <div class="principle-text">
+                        <h5>Community Resonance</h5>
+                        <p>Storytelling anchored in lived educator and student experience—empowerment, not corporate tech talk.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Episodes Section -->
+    <section class="episodes-section" id="episodes">
+        <div class="episodes-header">
+            <div>
+                <div class="section-label">Season 1</div>
+                <h2>Episode Guide</h2>
+            </div>
+            <div class="season-badge">
+                <span>8 Episodes</span>
+            </div>
+        </div>
+
+        <div class="episodes-grid">
+            <div class="episode-card" data-episode="1">
+                <div class="episode-meta">
+                    <span class="episode-number">EP 01</span>
+                    <span class="episode-status status-pilot">PILOT</span>
+                </div>
+                <h3>The Future Is Now: Why AI Matters for Every Educator</h3>
+                <div class="guest">ft. Dr. Ayanna Howard</div>
+                <p>Establishing authority and excitement around AI in education with a thought leader perspective.</p>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-meta">
+                    <span class="episode-number">EP 02</span>
+                    <span class="episode-status status-coming">COMING</span>
+                </div>
+                <h3>AI 101 for Educators: Myths, Facts & First Steps</h3>
+                <div class="guest">Foundational Episode</div>
+                <p>Building AI literacy and trust through clarity. Demystifying the technology for practitioners.</p>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-meta">
+                    <span class="episode-number">EP 03</span>
+                    <span class="episode-status status-coming">COMING</span>
+                </div>
+                <h3>Algorithmic Bias and the Black Child</h3>
+                <div class="guest">Equity & Data Ethics Expert</div>
+                <p>Linking AI, equity, and systemic fairness. Who gets left behind when algorithms decide?</p>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-meta">
+                    <span class="episode-number">EP 04</span>
+                    <span class="episode-status status-coming">COMING</span>
+                </div>
+                <h3>AI Skills That Pay the Bills</h3>
+                <div class="guest">LAEDC Workforce Development</div>
+                <p>Tying K-12 and college AI skills to workforce pipelines. Career pathways that matter.</p>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-meta">
+                    <span class="episode-number">EP 05</span>
+                    <span class="episode-status status-coming">COMING</span>
+                </div>
+                <h3>Classroom Innovators: AI in Real Schools</h3>
+                <div class="guest">Teacher Panel</div>
+                <p>Spotlighting applied practice and teacher voice. What's actually working in classrooms today.</p>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-meta">
+                    <span class="episode-number">EP 06</span>
+                    <span class="episode-status status-coming">COMING</span>
+                </div>
+                <h3>Parents, Students & the AI Homefront</h3>
+                <div class="guest">Parent Tech Advocate</div>
+                <p>Expanding reach to families and caregivers. Navigating AI at home and school together.</p>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-meta">
+                    <span class="episode-number">EP 07</span>
+                    <span class="episode-status status-coming">COMING</span>
+                </div>
+                <h3>Ethics & AI: Should Students Use ChatGPT?</h3>
+                <div class="guest">AI Ethics Professor + Student</div>
+                <p>Engaging in debate and critical reflection. The hard questions educators face daily.</p>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-meta">
+                    <span class="episode-number">EP 08</span>
+                    <span class="episode-status status-coming">COMING</span>
+                </div>
+                <h3>Season Finale: From Awareness to Action</h3>
+                <div class="guest">Compilation & Highlights</div>
+                <p>Reflect, summarize, and set the stage for Season 2. The ReimagineED movement continues.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hosts Section -->
+    <section class="hosts-section" id="hosts">
+        <div class="hosts-header">
+            <div class="section-label">Your Hosts</div>
+            <h2>Meet the Voices Behind ReimagineED</h2>
+            <p>Two perspectives, one mission: transforming education through AI with equity at the center.</p>
+        </div>
+
+        <div class="hosts-grid">
+            <div class="host-card">
+                <div class="host-avatar">WG</div>
+                <div class="host-info">
+                    <h4>Dr. William Gideon</h4>
+                    <div class="role">Co-Host & Education Innovator</div>
+                    <p>A visionary leader in K-12 transformation, Dr. Gideon brings decades of experience navigating change management, policy, and community engagement. He challenges assumptions and centers the student experience in every conversation.</p>
+                </div>
+            </div>
+
+            <div class="host-card">
+                <div class="host-avatar">MM</div>
+                <div class="host-info">
+                    <h4>Dr. Marie Martin</h4>
+                    <div class="role">Co-Host & Instructional Authority</div>
+                    <p>With 25+ years across K-12, higher ed, government, and military contexts, Dr. Martin brings human-centered pedagogy and leadership development expertise. She ensures every episode connects innovation to real classroom impact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-left">
+            <div class="footer-logo">REIMAGINE<span>ED</span></div>
+            <div class="footer-links">
                 <a href="#about">About</a>
+                <a href="#episodes">Episodes</a>
                 <a href="#hosts">Hosts</a>
-                <a href="#subscribe" class="nav-cta">Subscribe</a>
-            </nav>
-        </header>
-
-        <main>
-            <section class="hero">
-                <div class="hero-badge">New Podcast</div>
-                <h1>REIMAGINE<span>ED</span></h1>
-                <p class="tagline">The Disruptor in AI Education</p>
-
-                <div class="audio-player">
-                    <div class="audio-header">
-                        <div class="audio-icon">
-                            <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
-                        </div>
-                        <div class="audio-info">
-                            <h3>Sample Episode Preview</h3>
-                            <p>AI + Workforce Development</p>
-                        </div>
-                    </div>
-                    <div class="audio-controls">
-                        <button class="play-btn" id="playBtn" aria-label="Play">
-                            <svg viewBox="0 0 24 24" id="playIcon"><path d="M8 5v14l11-7z"/></svg>
-                        </button>
-                        <div class="progress-container">
-                            <div class="progress-bar" id="progressBar">
-                                <div class="progress-fill" id="progressFill"></div>
-                            </div>
-                            <div class="time-display">
-                                <span id="currentTime">0:00</span>
-                                <span id="duration">0:00</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="subscribe-section">
-                    <h4>Listen on</h4>
-                    <div class="subscribe-btns">
-                        <a href="#" class="subscribe-btn">
-                            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M5.34 0A5.328 5.328 0 000 5.34v13.32A5.328 5.328 0 005.34 24h13.32A5.328 5.328 0 0024 18.66V5.34A5.328 5.328 0 0018.66 0H5.34zm6.525 5.64c3.886 0 6.14 2.18 6.14 6.32v.14h-2.79v-.14c0-2.54-1.32-3.78-3.35-3.78s-3.26 1.31-3.26 3.44c0 4.69 9.54 3.03 9.54 9.77 0 3.39-2.37 5.96-6.17 5.96-4.03 0-6.48-2.54-6.48-6.7v-.26h2.79v.26c0 2.72 1.53 4.16 3.69 4.16 2.18 0 3.38-1.37 3.38-3.35 0-5.08-9.54-3.36-9.54-9.89 0-3.64 2.54-5.95 6.08-5.95z"/></svg>
-                            Spotify
-                        </a>
-                        <a href="#" class="subscribe-btn">
-                            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
-                            Apple
-                        </a>
-                        <a href="#" class="subscribe-btn">
-                            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm4.95 17.52l-5.99-3.5c-.19-.11-.31-.32-.31-.54V6.62c0-.33.27-.6.6-.6s.6.27.6.6v6.49l5.64 3.3c.29.17.39.54.22.83-.17.29-.54.39-.83.22l.07.06z"/></svg>
-                            Google
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            <section class="episodes-panel">
-                <div class="panel-header">
-                    <h2>Season 1 Episodes</h2>
-                    <span class="season-tag">8 Episodes</span>
-                </div>
-                <div class="episodes-grid">
-                    <div class="episode-card">
-                        <div class="episode-number">
-                            EP 01
-                            <span class="episode-status status-pilot">PILOT</span>
-                        </div>
-                        <h3>AI + Workforce Development</h3>
-                        <p>What's changing in the workforce and why educators must adapt to prepare students.</p>
-                        <span class="episode-format">Co-hosted Discussion</span>
-                    </div>
-                    <div class="episode-card">
-                        <div class="episode-number">
-                            EP 02
-                            <span class="episode-status status-coming">COMING</span>
-                        </div>
-                        <h3>AI Literacy for Every Student</h3>
-                        <p>Practical classroom tools and prompting basics for K-12 educators.</p>
-                        <span class="episode-format">Co-hosted + Guest</span>
-                    </div>
-                    <div class="episode-card">
-                        <div class="episode-number">
-                            EP 03
-                            <span class="episode-status status-coming">COMING</span>
-                        </div>
-                        <h3>AI + Equity: Who Gets Left Behind?</h3>
-                        <p>Bias, access gaps, and Global Majority perspectives in AI education.</p>
-                        <span class="episode-format">Deep Dive</span>
-                    </div>
-                    <div class="episode-card">
-                        <div class="episode-number">
-                            EP 04
-                            <span class="episode-status status-coming">COMING</span>
-                        </div>
-                        <h3>A Superintendent's AI Strategy</h3>
-                        <p>Real-world K-12 implementation stories from district leadership.</p>
-                        <span class="episode-format">Guest Interview</span>
-                    </div>
-                    <div class="episode-card">
-                        <div class="episode-number">
-                            EP 05
-                            <span class="episode-status status-coming">COMING</span>
-                        </div>
-                        <h3>National Education Policy + AI</h3>
-                        <p>What's happening at federal and state levels for AI in schools.</p>
-                        <span class="episode-format">Co-hosted Analysis</span>
-                    </div>
-                    <div class="episode-card">
-                        <div class="episode-number">
-                            EP 06
-                            <span class="episode-status status-coming">COMING</span>
-                        </div>
-                        <h3>AI + the African American Community</h3>
-                        <p>Implications, opportunities, and concerns for communities of color.</p>
-                        <span class="episode-format">Community Voice</span>
-                    </div>
-                    <div class="episode-card">
-                        <div class="episode-number">
-                            EP 07
-                            <span class="episode-status status-coming">COMING</span>
-                        </div>
-                        <h3>Global Education: What Others Are Doing</h3>
-                        <p>International comparisons and lessons from around the world.</p>
-                        <span class="episode-format">Research Share</span>
-                    </div>
-                    <div class="episode-card">
-                        <div class="episode-number">
-                            EP 08
-                            <span class="episode-status status-coming">COMING</span>
-                        </div>
-                        <h3>The ReimagineED Vision</h3>
-                        <p>Season finale: Where we go from here and call to action.</p>
-                        <span class="episode-format">Reflection</span>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <div class="hosts">
-                <div class="host">
-                    <div class="host-avatar">WG</div>
-                    <div class="host-info">
-                        <strong>Dr. William Gideon</strong>
-                        <span>Co-Host</span>
-                    </div>
-                </div>
-                <div class="host">
-                    <div class="host-avatar">MM</div>
-                    <div class="host-info">
-                        <strong>Dr. Marie Martin</strong>
-                        <span>Co-Host</span>
-                    </div>
-                </div>
+                <a href="#subscribe">Subscribe</a>
             </div>
-            <div class="footer-right">
-                <div class="social-links">
-                    <a href="#" aria-label="LinkedIn">
-                        <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-                    </a>
-                    <a href="#" aria-label="X/Twitter">
-                        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    </a>
-                    <a href="#" aria-label="Instagram">
-                        <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
-                    </a>
-                </div>
-                <div class="branding">
-                    A <strong>The Right Path</strong> Production
-                </div>
+        </div>
+        <div class="footer-right">
+            <div class="social-links">
+                <a href="#" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                </a>
+                <a href="#" aria-label="X/Twitter">
+                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+                </a>
+                <a href="#" aria-label="YouTube">
+                    <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
             </div>
-        </footer>
-    </div>
+            <div class="branding">
+                A <strong>The Right Path</strong> Production
+            </div>
+        </div>
+    </footer>
 
     <audio id="audioPlayer" preload="metadata">
         <source src="assets/TheRightPath_Episode_Mixed.mp3" type="audio/mpeg">
@@ -840,7 +1220,6 @@
         // Episode card interactions
         document.querySelectorAll('.episode-card').forEach(card => {
             card.addEventListener('click', function() {
-                const title = this.querySelector('h3').textContent;
                 const status = this.querySelector('.episode-status');
                 if (status && status.classList.contains('status-pilot')) {
                     if (audio.paused) {
@@ -848,6 +1227,19 @@
                         playBtn.classList.add('playing');
                         playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
                     }
+                    // Scroll to player
+                    document.querySelector('.audio-player').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
