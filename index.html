@@ -3,1318 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ReimagineED | The Disruptor in AI Education</title>
+    <title>The Right Path Podcast | AI in Action. Educate. Employ. Empower.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --navy: #0B1D3A;
-            --navy-light: #132847;
-            --navy-dark: #071428;
-            --gold: #FFD33A;
-            --gold-dim: rgba(255, 211, 58, 0.15);
-            --electric-blue: #00D9FF;
-            --purple: #7B2FFF;
-            --coral: #FF6B6B;
-            --charcoal: #333333;
-            --white: #FFFFFF;
-            --gray-100: #F8F9FA;
-            --gray-200: #E9ECEF;
-            --gray-400: #ADB5BD;
-            --gray-600: #6C757D;
-            --gradient-primary: linear-gradient(135deg, #0B1D3A 0%, #132847 50%, #1a3a5c 100%);
-            --gradient-accent: linear-gradient(135deg, #7B2FFF 0%, #00D9FF 100%);
-            --gradient-gold: linear-gradient(135deg, #FFD33A 0%, #FFC107 100%);
-            --gradient-warm: linear-gradient(135deg, #FF6B6B 0%, #FFD33A 100%);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--navy);
-            color: var(--white);
-            line-height: 1.6;
-        }
-
-        /* Header - Fixed */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 3rem;
-            background: rgba(11, 29, 58, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
-        }
-
-        .logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            letter-spacing: -0.02em;
-        }
-
-        .logo span {
-            color: var(--gold);
-        }
-
-        nav {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        nav a {
-            color: var(--gray-200);
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        nav a:hover {
-            color: var(--electric-blue);
-        }
-
-        .nav-cta {
-            background: var(--gradient-gold);
-            color: var(--navy) !important;
-            padding: 0.5rem 1.25rem;
-            border-radius: 6px;
-            font-weight: 600;
-        }
-
-        .nav-cta:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 20px rgba(255, 211, 58, 0.3);
-        }
-
-        /* Sections */
-        section {
-            padding: 6rem 3rem;
-            position: relative;
-        }
-
-        .section-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--electric-blue);
-            margin-bottom: 0.75rem;
-            font-weight: 600;
-        }
-
-        /* Hero Section */
-        .hero-section {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            padding-top: 8rem;
-            background: var(--gradient-primary);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                radial-gradient(circle at 20% 80%, rgba(123, 47, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 217, 255, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(255, 211, 58, 0.03) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(0, 217, 255, 0.1);
-            border: 1px solid rgba(0, 217, 255, 0.2);
-            padding: 0.4rem 0.9rem;
-            border-radius: 100px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--electric-blue);
-            width: fit-content;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-badge::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--electric-blue);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        .hero-content h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 4rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-        }
-
-        .hero-content h1 span {
-            color: var(--gold);
-        }
-
-        .hero-content .tagline {
-            font-size: 1.25rem;
-            color: var(--gray-400);
-            font-weight: 400;
-            margin-bottom: 1rem;
-            letter-spacing: 0.02em;
-        }
-
-        .hero-content .positioning {
-            font-size: 0.95rem;
-            color: var(--gray-200);
-            max-width: 480px;
-            margin-bottom: 2rem;
-            line-height: 1.7;
-        }
-
-        /* POV Pillars */
-        .pov-pillars {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .pov-pill {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.4rem 0.75rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            font-size: 0.7rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .pov-pill.policy { color: var(--electric-blue); border-color: rgba(0, 217, 255, 0.3); }
-        .pov-pill.leadership { color: var(--purple); border-color: rgba(123, 47, 255, 0.3); }
-        .pov-pill.parents { color: var(--gold); border-color: rgba(255, 211, 58, 0.3); }
-        .pov-pill.industry { color: var(--coral); border-color: rgba(255, 107, 107, 0.3); }
-
-        /* Subscribe Buttons */
-        .subscribe-btns {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .subscribe-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.7rem 1.25rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: var(--white);
-            font-size: 0.85rem;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
-        .subscribe-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--electric-blue);
-            transform: translateY(-1px);
-        }
-
-        .subscribe-btn svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        /* Hero Right - Audio Player + Format */
-        .hero-right {
-            position: relative;
-            z-index: 1;
-        }
-
-        .audio-player {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .audio-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.25rem;
-        }
-
-        .audio-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--gradient-accent);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .audio-icon svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--white);
-        }
-
-        .audio-info h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-        }
-
-        .audio-info p {
-            font-size: 0.8rem;
-            color: var(--gray-400);
-        }
-
-        .audio-controls {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .play-btn {
-            width: 52px;
-            height: 52px;
-            background: var(--gradient-gold);
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            flex-shrink: 0;
-        }
-
-        .play-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 24px rgba(255, 211, 58, 0.4);
-        }
-
-        .play-btn svg {
-            width: 22px;
-            height: 22px;
-            fill: var(--navy);
-            margin-left: 2px;
-        }
-
-        .play-btn.playing svg {
-            margin-left: 0;
-        }
-
-        .progress-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .progress-bar {
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background: var(--electric-blue);
-            border-radius: 3px;
-            transition: width 0.1s linear;
-        }
-
-        .time-display {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75rem;
-            color: var(--gray-400);
-            font-family: 'Inter', monospace;
-        }
-
-        /* Format Breakdown */
-        .format-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
-            padding: 1.5rem;
-        }
-
-        .format-card h4 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .format-card h4 span {
-            font-size: 0.7rem;
-            color: var(--gray-400);
-            font-weight: 400;
-        }
-
-        .format-segments {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .format-segment {
-            flex: 1;
-            padding: 1rem;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .format-segment.educate {
-            background: linear-gradient(135deg, rgba(0, 217, 255, 0.15) 0%, rgba(0, 217, 255, 0.05) 100%);
-            border: 1px solid rgba(0, 217, 255, 0.2);
-        }
-
-        .format-segment.employ {
-            background: linear-gradient(135deg, rgba(123, 47, 255, 0.15) 0%, rgba(123, 47, 255, 0.05) 100%);
-            border: 1px solid rgba(123, 47, 255, 0.2);
-        }
-
-        .format-segment.empower {
-            background: linear-gradient(135deg, rgba(255, 211, 58, 0.15) 0%, rgba(255, 211, 58, 0.05) 100%);
-            border: 1px solid rgba(255, 211, 58, 0.2);
-        }
-
-        .format-segment .time {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--gray-400);
-            margin-bottom: 0.25rem;
-        }
-
-        .format-segment .label {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .format-segment.educate .label { color: var(--electric-blue); }
-        .format-segment.employ .label { color: var(--purple); }
-        .format-segment.empower .label { color: var(--gold); }
-
-        /* About Section */
-        .about-section {
-            background: var(--navy-dark);
-            border-top: 1px solid rgba(0, 217, 255, 0.1);
-            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .about-content h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .about-content p {
-            color: var(--gray-200);
-            margin-bottom: 1.25rem;
-            font-size: 0.95rem;
-        }
-
-        .about-content .highlight {
-            color: var(--electric-blue);
-            font-weight: 500;
-        }
-
-        /* Principles List */
-        .principles-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .principle {
-            display: flex;
-            gap: 1rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .principle-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--gradient-accent);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 1rem;
-        }
-
-        .principle-text h5 {
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .principle-text p {
-            font-size: 0.8rem;
-            color: var(--gray-400);
-            margin: 0;
-        }
-
-        /* Episodes Section */
-        .episodes-section {
-            background: var(--gradient-primary);
-        }
-
-        .episodes-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 2rem;
-        }
-
-        .episodes-header h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
-        .season-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(0, 217, 255, 0.1);
-            border: 1px solid rgba(0, 217, 255, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 100px;
-            font-size: 0.8rem;
-            color: var(--electric-blue);
-        }
-
-        .episodes-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.25rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .episode-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 14px;
-            padding: 1.5rem;
-            transition: all 0.3s;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .episode-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-accent);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .episode-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(0, 217, 255, 0.2);
-            transform: translateY(-3px);
-        }
-
-        .episode-card:hover::before {
-            opacity: 1;
-        }
-
-        .episode-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.75rem;
-        }
-
-        .episode-number {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: var(--electric-blue);
-        }
-
-        .episode-status {
-            font-size: 0.6rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 100px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .status-pilot {
-            background: var(--gradient-gold);
-            color: var(--navy);
-        }
-
-        .status-coming {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--gray-400);
-        }
-
-        .episode-card h3 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            line-height: 1.35;
-        }
-
-        .episode-card .guest {
-            font-size: 0.75rem;
-            color: var(--purple);
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .episode-card p {
-            font-size: 0.8rem;
-            color: var(--gray-400);
-            line-height: 1.5;
-        }
-
-        /* Hosts Section */
-        .hosts-section {
-            background: var(--navy-dark);
-            border-top: 1px solid rgba(0, 217, 255, 0.1);
-        }
-
-        .hosts-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .hosts-header h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .hosts-header p {
-            color: var(--gray-400);
-            font-size: 0.95rem;
-        }
-
-        .hosts-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .host-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
-            padding: 2rem;
-            display: flex;
-            gap: 1.5rem;
-            align-items: flex-start;
-        }
-
-        .host-avatar {
-            width: 72px;
-            height: 72px;
-            background: var(--gradient-accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .host-info h4 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .host-info .role {
-            font-size: 0.8rem;
-            color: var(--electric-blue);
-            margin-bottom: 0.75rem;
-            font-weight: 500;
-        }
-
-        .host-info p {
-            font-size: 0.85rem;
-            color: var(--gray-400);
-            line-height: 1.6;
-        }
-
-        /* Footer */
-        footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 3rem;
-            background: var(--navy);
-            border-top: 1px solid rgba(0, 217, 255, 0.1);
-        }
-
-        .footer-left {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .footer-logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.25rem;
-        }
-
-        .footer-logo span {
-            color: var(--gold);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .footer-links a {
-            color: var(--gray-400);
-            text-decoration: none;
-            font-size: 0.8rem;
-            transition: color 0.2s;
-        }
-
-        .footer-links a:hover {
-            color: var(--electric-blue);
-        }
-
-        .footer-right {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        .social-links a {
-            width: 36px;
-            height: 36px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-
-        .social-links a:hover {
-            background: var(--electric-blue);
-        }
-
-        .social-links svg {
-            width: 18px;
-            height: 18px;
-            fill: var(--white);
-        }
-
-        .branding {
-            font-size: 0.8rem;
-            color: var(--gray-400);
-        }
-
-        .branding strong {
-            color: var(--white);
-        }
-
-        /* Scroll Arrow */
-        .scroll-arrow {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s;
-            z-index: 10;
-        }
-
-        .scroll-arrow:hover {
-            transform: translateX(-50%) translateY(-5px);
-        }
-
-        .scroll-arrow span {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--gray-400);
-            font-weight: 500;
-        }
-
-        .scroll-arrow svg {
-            width: 32px;
-            height: 32px;
-            stroke: var(--electric-blue);
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(8px);
-            }
-            60% {
-                transform: translateY(4px);
-            }
-        }
-
-        .scroll-arrow:hover svg {
-            stroke: var(--gold);
-        }
-
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .episodes-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 992px) {
-            .hero-section {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .hosts-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            section {
-                padding: 4rem 1.5rem;
-            }
-
-            header {
-                padding: 1rem 1.5rem;
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .format-segments {
-                flex-direction: column;
-            }
-
-            .episodes-grid {
-                grid-template-columns: 1fr;
-            }
-
-            nav {
-                display: none;
-            }
-
-            footer {
-                flex-direction: column;
-                gap: 1.5rem;
-                padding: 1.5rem;
-            }
-
-            .footer-left, .footer-right {
-                flex-direction: column;
-                gap: 1rem;
-            }
-        }
+        :root{--purple:#6B2D8B;--purple-light:#8B4DAB;--purple-dark:#4A1D61;--purple-pale:rgba(107,45,139,.06);--purple-mist:rgba(107,45,139,.03);--white:#FFF;--off-white:#FAFAFA;--charcoal:#2C2C2C;--gray-600:#6B6B6B;--gray-400:#9B9B9B;--gray-200:#E5E5E5;--gray-100:#F0F0F0}
+        *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+        body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--white);color:var(--charcoal);line-height:1.7}
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        .fade-in{animation:fadeInUp .8s ease-out forwards}.delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}.delay-4{animation-delay:.4s}
+        header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.25rem 4rem;background:rgba(255,255,255,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--gray-200)}
+        .logo-text{font-family:'Crimson Pro',Georgia,serif;font-weight:600;font-size:1.35rem;color:var(--charcoal);letter-spacing:-.02em}
+        nav{display:flex;gap:2.5rem;align-items:center}nav a{color:var(--gray-600);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .2s}nav a:hover{color:var(--purple)}
+        .nav-cta{background:var(--purple);color:var(--white)!important;padding:.6rem 1.5rem;border-radius:4px;font-weight:600;transition:all .2s}.nav-cta:hover{background:var(--purple-dark);transform:translateY(-1px)}
+        section{padding:7rem 4rem;position:relative}.section-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.2em;color:var(--purple);margin-bottom:1rem;font-weight:600}
+        .hero-section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:6rem;background:var(--white);position:relative;overflow:hidden}
+        .hero-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,var(--purple-mist) 0%,transparent 50%),radial-gradient(ellipse at 70% 80%,var(--purple-pale) 0%,transparent 40%);pointer-events:none}
+        .hero-content{position:relative;z-index:1;max-width:900px}
+        .hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--purple-pale);border:1px solid rgba(107,45,139,.15);padding:.5rem 1.25rem;border-radius:100px;font-size:.8rem;font-weight:500;color:var(--purple);margin-bottom:2rem}
+        .hero-badge::before{content:'';width:8px;height:8px;background:var(--purple);border-radius:50%;animation:pulse 2s infinite}
+        @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.9)}}
+        .hero-content h1{font-family:'Crimson Pro',Georgia,serif;font-size:4.5rem;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:1.5rem;color:var(--charcoal)}
+        .hero-content .tagline{font-family:'Crimson Pro',Georgia,serif;font-size:1.75rem;color:var(--purple);font-weight:500;margin-bottom:1.5rem;letter-spacing:.02em;font-style:italic}
+        .hero-content .positioning{font-size:1.1rem;color:var(--gray-600);max-width:640px;margin:0 auto 2.5rem;line-height:1.8}
+        .subscribe-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+        .subscribe-btn{display:flex;align-items:center;gap:.6rem;padding:.85rem 1.5rem;background:var(--white);border:1.5px solid var(--gray-200);border-radius:6px;color:var(--charcoal);font-size:.9rem;font-weight:500;text-decoration:none;transition:all .2s}
+        .subscribe-btn:hover{border-color:var(--purple);color:var(--purple);transform:translateY(-2px);box-shadow:0 4px 12px rgba(107,45,139,.1)}
+        .subscribe-btn svg{width:20px;height:20px}
+        .scroll-indicator{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;cursor:pointer;text-decoration:none}
+        .scroll-indicator span{font-size:.7rem;text-transform:uppercase;letter-spacing:.2em;color:var(--gray-400)}
+        .scroll-indicator .line{width:1px;height:40px;background:linear-gradient(to bottom,var(--purple),transparent);animation:scrollLine 1.5s ease-in-out infinite}
+        @keyframes scrollLine{0%,100%{opacity:.3;transform:scaleY(.5)}50%{opacity:1;transform:scaleY(1)}}
+        .pillars-section{background:var(--off-white);border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200)}
+        .pillars-header{text-align:center;margin-bottom:4rem}
+        .pillars-header h2{font-family:'Crimson Pro',Georgia,serif;font-size:2.75rem;font-weight:600;color:var(--charcoal);letter-spacing:-.02em}
+        .pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:1100px;margin:0 auto}
+        .pillar-card{background:var(--white);border:1px solid var(--gray-200);border-radius:12px;padding:2.5rem;text-align:center;transition:all .3s;position:relative;overflow:hidden}
+        .pillar-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--purple);transform:scaleX(0);transition:transform .3s}
+        .pillar-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(107,45,139,.08);border-color:rgba(107,45,139,.2)}
+        .pillar-card:hover::before{transform:scaleX(1)}
+        .pillar-icon{width:64px;height:64px;background:var(--purple-pale);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:1.75rem}
+        .pillar-card h3{font-family:'Crimson Pro',Georgia,serif;font-size:1.5rem;font-weight:600;color:var(--purple);margin-bottom:.75rem}
+        .pillar-card p{font-size:.95rem;color:var(--gray-600);line-height:1.7}
+        .player-section{background:var(--white);padding:5rem 4rem}
+        .player-container{max-width:800px;margin:0 auto}
+        .player-header{text-align:center;margin-bottom:2.5rem}
+        .player-header h2{font-family:'Crimson Pro',Georgia,serif;font-size:2rem;font-weight:600;color:var(--charcoal);margin-bottom:.5rem}
+        .player-header p{color:var(--gray-600);font-size:1rem}
+        .audio-player{background:var(--off-white);border:1px solid var(--gray-200);border-radius:16px;padding:2rem}
+        .audio-header{display:flex;align-items:center;gap:1.25rem;margin-bottom:1.5rem}
+        .audio-icon{width:56px;height:56px;background:var(--purple);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        .audio-icon svg{width:28px;height:28px;fill:var(--white)}
+        .audio-info h3{font-family:'Crimson Pro',Georgia,serif;font-size:1.25rem;font-weight:600;color:var(--charcoal);margin-bottom:.25rem}
+        .audio-info p{font-size:.9rem;color:var(--gray-600)}
+        .audio-controls{display:flex;align-items:center;gap:1.25rem}
+        .play-btn{width:56px;height:56px;background:var(--purple);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+        .play-btn:hover{background:var(--purple-dark);transform:scale(1.05)}
+        .play-btn svg{width:24px;height:24px;fill:var(--white);margin-left:3px}
+        .progress-container{flex:1;display:flex;flex-direction:column;gap:.5rem}
+        .progress-bar{height:6px;background:var(--gray-200);border-radius:3px;cursor:pointer;overflow:hidden}
+        .progress-fill{height:100%;width:0;background:var(--purple);border-radius:3px;transition:width .1s linear}
+        .time-display{display:flex;justify-content:space-between;font-size:.8rem;color:var(--gray-600)}
+        .format-section{background:var(--purple);color:var(--white);padding:5rem 4rem}
+        .format-container{max-width:1000px;margin:0 auto;text-align:center}
+        .format-container h2{font-family:'Crimson Pro',Georgia,serif;font-size:2.25rem;font-weight:600;margin-bottom:1rem}
+        .format-container .subtitle{font-size:1rem;opacity:.85;margin-bottom:3rem}
+        .format-segments{display:flex;gap:1.5rem;justify-content:center}
+        .format-segment{flex:1;max-width:280px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:2rem;text-align:center;transition:all .3s}
+        .format-segment:hover{background:rgba(255,255,255,.15);transform:translateY(-4px)}
+        .format-segment .time{font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;opacity:.7;margin-bottom:.5rem}
+        .format-segment .label{font-family:'Crimson Pro',Georgia,serif;font-size:1.75rem;font-weight:600;margin-bottom:.75rem}
+        .format-segment .desc{font-size:.9rem;opacity:.85;line-height:1.6}
+        .episodes-section{background:var(--white)}
+        .episodes-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:3rem;max-width:1200px;margin-left:auto;margin-right:auto}
+        .episodes-header h2{font-family:'Crimson Pro',Georgia,serif;font-size:2.5rem;font-weight:600;color:var(--charcoal)}
+        .season-badge{background:var(--purple-pale);border:1px solid rgba(107,45,139,.15);padding:.6rem 1.25rem;border-radius:100px;font-size:.85rem;color:var(--purple);font-weight:500}
+        .episodes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:1200px;margin:0 auto}
+        .episode-card{background:var(--white);border:1px solid var(--gray-200);border-radius:12px;padding:1.75rem;transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
+        .episode-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--purple);transform:scaleX(0);transition:transform .3s}
+        .episode-card:hover{border-color:rgba(107,45,139,.3);transform:translateY(-4px);box-shadow:0 12px 40px rgba(107,45,139,.08)}
+        .episode-card:hover::before{transform:scaleX(1)}
+        .episode-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem}
+        .episode-number{font-size:.75rem;font-weight:600;color:var(--purple)}
+        .episode-status{font-size:.65rem;padding:.25rem .6rem;border-radius:100px;font-weight:600;text-transform:uppercase}
+        .status-pilot{background:var(--purple);color:var(--white)}
+        .status-coming{background:var(--gray-100);color:var(--gray-600)}
+        .episode-card h3{font-family:'Crimson Pro',Georgia,serif;font-size:1.1rem;font-weight:600;color:var(--charcoal);margin-bottom:.5rem;line-height:1.35}
+        .episode-card .guest{font-size:.8rem;color:var(--purple);margin-bottom:.5rem;font-weight:500}
+        .episode-card p{font-size:.85rem;color:var(--gray-600);line-height:1.55}
+        .hosts-section{background:var(--off-white);border-top:1px solid var(--gray-200)}
+        .hosts-header{text-align:center;margin-bottom:3.5rem}
+        .hosts-header h2{font-family:'Crimson Pro',Georgia,serif;font-size:2.5rem;font-weight:600;color:var(--charcoal);margin-bottom:.75rem}
+        .hosts-header p{color:var(--gray-600);font-size:1.05rem}
+        .hosts-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2.5rem;max-width:1000px;margin:0 auto}
+        .host-card{background:var(--white);border:1px solid var(--gray-200);border-radius:16px;padding:2.5rem;display:flex;gap:1.75rem;align-items:flex-start;transition:all .3s}
+        .host-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(107,45,139,.06);border-color:rgba(107,45,139,.2)}
+        .host-avatar{width:80px;height:80px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Crimson Pro',Georgia,serif;font-weight:700;font-size:1.75rem;color:var(--white);flex-shrink:0}
+        .host-info h4{font-family:'Crimson Pro',Georgia,serif;font-size:1.35rem;font-weight:600;color:var(--charcoal);margin-bottom:.25rem}
+        .host-info .role{font-size:.85rem;color:var(--purple);margin-bottom:1rem;font-weight:500}
+        .host-info p{font-size:.95rem;color:var(--gray-600);line-height:1.7}
+        footer{background:var(--charcoal);color:var(--white);padding:3rem 4rem}
+        .footer-content{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}
+        .footer-left{display:flex;align-items:center;gap:2rem}
+        .footer-logo{display:flex;align-items:center;gap:.75rem}
+        .footer-logo img{width:36px;height:36px;border-radius:8px}
+        .footer-logo-text{font-family:'Crimson Pro',Georgia,serif;font-weight:600;font-size:1rem;color:var(--white)}
+        .footer-links{display:flex;gap:2rem}
+        .footer-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.85rem;transition:color .2s}
+        .footer-links a:hover{color:var(--white)}
+        .footer-right{display:flex;align-items:center;gap:1.5rem}
+        .social-links{display:flex;gap:.75rem}
+        .social-links a{width:36px;height:36px;background:rgba(255,255,255,.1);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+        .social-links a:hover{background:var(--purple)}
+        .social-links svg{width:18px;height:18px;fill:var(--white)}
+        .copyright{font-size:.8rem;color:rgba(255,255,255,.5)}
+        @media(max-width:1200px){.episodes-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:992px){section{padding:5rem 2rem}header{padding:1rem 2rem}.hero-content h1{font-size:3.25rem}.pillars-grid{grid-template-columns:1fr}.format-segments{flex-direction:column;align-items:center}.format-segment{max-width:100%}.hosts-grid{grid-template-columns:1fr}}
+        @media(max-width:768px){section{padding:4rem 1.5rem}header{padding:1rem 1.5rem}.hero-content h1{font-size:2.5rem}.hero-content .tagline{font-size:1.35rem}.episodes-grid{grid-template-columns:1fr}nav{display:none}footer{padding:2rem 1.5rem}.footer-content{flex-direction:column;gap:2rem;text-align:center}.footer-left,.footer-right{flex-direction:column;gap:1.5rem}.host-card{flex-direction:column;align-items:center;text-align:center}}
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">REIMAGINE<span>ED</span></div>
+        <div class="logo-text">The Right Path Podcast</div>
         <nav>
-            <a href="#about">About</a>
+            <a href="#pillars">About</a>
             <a href="#episodes">Episodes</a>
             <a href="#hosts">Hosts</a>
             <a href="#subscribe" class="nav-cta">Subscribe</a>
         </nav>
     </header>
-
-    <!-- Hero Section -->
     <section class="hero-section" id="home">
         <div class="hero-content">
-            <div class="hero-badge">Season 1 Now Available</div>
-            <h1>REIMAGINE<span>ED</span></h1>
-            <p class="tagline">The Disruptor in AI Education</p>
-            <p class="positioning">A leadership resource for understanding how AI, workforce shifts, and community development intersect with the future of schools. We center humanity and equity—making AI adoption a tool for removing barriers and creating opportunity.</p>
-
-            <div class="pov-pillars">
-                <span class="pov-pill policy">Policy</span>
-                <span class="pov-pill leadership">Leadership</span>
-                <span class="pov-pill parents">Parents</span>
-                <span class="pov-pill industry">Industry</span>
-            </div>
-
-            <div class="subscribe-btns" id="subscribe">
-                <a href="#" class="subscribe-btn">
-                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M5.34 0A5.328 5.328 0 000 5.34v13.32A5.328 5.328 0 005.34 24h13.32A5.328 5.328 0 0024 18.66V5.34A5.328 5.328 0 0018.66 0H5.34zm6.525 5.64c3.886 0 6.14 2.18 6.14 6.32v.14h-2.79v-.14c0-2.54-1.32-3.78-3.35-3.78s-3.26 1.31-3.26 3.44c0 4.69 9.54 3.03 9.54 9.77 0 3.39-2.37 5.96-6.17 5.96-4.03 0-6.48-2.54-6.48-6.7v-.26h2.79v.26c0 2.72 1.53 4.16 3.69 4.16 2.18 0 3.38-1.37 3.38-3.35 0-5.08-9.54-3.36-9.54-9.89 0-3.64 2.54-5.95 6.08-5.95z"/></svg>
-                    Spotify
-                </a>
-                <a href="#" class="subscribe-btn">
-                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
-                    Apple Podcasts
-                </a>
-                <a href="#" class="subscribe-btn">
-                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm4.95 17.52l-5.99-3.5c-.19-.11-.31-.32-.31-.54V6.62c0-.33.27-.6.6-.6s.6.27.6.6v6.49l5.64 3.3c.29.17.39.54.22.83-.17.29-.54.39-.83.22l.07.06z"/></svg>
-                    Google
-                </a>
+            <div class="hero-badge fade-in">Season 1 Now Available</div>
+            <h1 class="fade-in delay-1">The Right Path<br>Podcast</h1>
+            <p class="tagline fade-in delay-2">AI in Action. Educate. Employ. Empower.</p>
+            <p class="positioning fade-in delay-3">A leadership resource for understanding how AI, workforce shifts, and community development intersect with the future of schools. We center humanity and equity—making AI adoption a tool for removing barriers and creating opportunity.</p>
+            <div class="subscribe-btns fade-in delay-4" id="subscribe">
+                <a href="#" class="subscribe-btn"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>Spotify</a>
+                <a href="#" class="subscribe-btn"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>Apple Podcasts</a>
+                <a href="#" class="subscribe-btn"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm4.95 17.52l-5.99-3.5c-.19-.11-.31-.32-.31-.54V6.62c0-.33.27-.6.6-.6s.6.27.6.6v6.49l5.64 3.3c.29.17.39.54.22.83-.17.29-.54.39-.83.22l.07.06z"/></svg>Google Podcasts</a>
             </div>
         </div>
-
-        <div class="hero-right">
+        <a href="#pillars" class="scroll-indicator"><span>Explore</span><div class="line"></div></a>
+    </section>
+    <section class="pillars-section" id="pillars">
+        <div class="pillars-header">
+            <div class="section-label">Our Framework</div>
+            <h2>Three Pillars. One Mission.</h2>
+        </div>
+        <div class="pillars-grid">
+            <div class="pillar-card"><div class="pillar-icon">📚</div><h3>Educate</h3><p>Building AI literacy and trust through clarity. Demystifying technology for educators, leaders, and communities with practical knowledge they can apply today.</p></div>
+            <div class="pillar-card"><div class="pillar-icon">💼</div><h3>Employ</h3><p>Connecting K-12 and higher education to workforce pipelines. Creating career pathways that prepare students for the jobs of tomorrow with real-world AI skills.</p></div>
+            <div class="pillar-card"><div class="pillar-icon">🚀</div><h3>Empower</h3><p>Amplifying voices missing from the AI conversation. Centering equity and access to ensure technology serves all students, families, and communities.</p></div>
+        </div>
+    </section>
+    <section class="player-section">
+        <div class="player-container">
+            <div class="player-header">
+                <div class="section-label">Listen Now</div>
+                <h2>Latest Episode</h2>
+                <p>The pilot that started it all</p>
+            </div>
             <div class="audio-player">
                 <div class="audio-header">
-                    <div class="audio-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
-                    </div>
-                    <div class="audio-info">
-                        <h3>Episode 1: The Future Is Now</h3>
-                        <p>Why AI Matters for Every Educator</p>
-                    </div>
+                    <div class="audio-icon"><svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg></div>
+                    <div class="audio-info"><h3>Episode 1: The Future Is Now</h3><p>Why AI Matters for Every Educator</p></div>
                 </div>
                 <div class="audio-controls">
-                    <button class="play-btn" id="playBtn" aria-label="Play">
-                        <svg viewBox="0 0 24 24" id="playIcon"><path d="M8 5v14l11-7z"/></svg>
-                    </button>
+                    <button class="play-btn" id="playBtn" aria-label="Play"><svg viewBox="0 0 24 24" id="playIcon"><path d="M8 5v14l11-7z"/></svg></button>
                     <div class="progress-container">
-                        <div class="progress-bar" id="progressBar">
-                            <div class="progress-fill" id="progressFill"></div>
-                        </div>
-                        <div class="time-display">
-                            <span id="currentTime">0:00</span>
-                            <span id="duration">6:11</span>
-                        </div>
+                        <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+                        <div class="time-display"><span id="currentTime">0:00</span><span id="duration">6:11</span></div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <a href="#about" class="scroll-arrow">
-            <span>Scroll</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
-            </svg>
-        </a>
     </section>
-
-    <!-- About Section -->
-    <section class="about-section" id="about">
-        <div class="about-grid">
-            <div class="about-content">
-                <div class="section-label">About the Show</div>
-                <h2>For Leaders Who Want an Edge in AI and Innovation</h2>
-                <p>ReimagineED is designed for <span class="highlight">district superintendents, principals, education innovators, policymakers, and community changemakers</span> who want to understand how AI reshapes schools, workforce, and communities.</p>
-                <p>This isn't "teacher tips" or one-note interviews. We model the tensions of innovation—sometimes agreeing, sometimes challenging each other. We draw lines between education, urban development, entrepreneurial thinking, and the future workforce.</p>
-                <p>Inspired by the legacy of <span class="highlight">Tony Brown's Journal</span>, we fill an underserved gap: amplifying voices missing from the AI conversation—teachers, parents, students, and workforce leaders in marginalized communities.</p>
-            </div>
-
-            <div class="principles-list">
-                <div class="principle">
-                    <div class="principle-icon">🎯</div>
-                    <div class="principle-text">
-                        <h5>Fill the Gap</h5>
-                        <p>Spotlight equity in AI and amplify underrepresented voices in every episode.</p>
-                    </div>
-                </div>
-                <div class="principle">
-                    <div class="principle-icon">🎙️</div>
-                    <div class="principle-text">
-                        <h5>Authentic Leadership</h5>
-                        <p>Unapologetically authoritative hosts who center humanity and challenge status quo.</p>
-                    </div>
-                </div>
-                <div class="principle">
-                    <div class="principle-icon">📚</div>
-                    <div class="principle-text">
-                        <h5>Depth Over Width</h5>
-                        <p>Thematic mini-series (AI & Equity, Workforce Futures) create continuity and repeat listeners.</p>
-                    </div>
-                </div>
-                <div class="principle">
-                    <div class="principle-icon">🤝</div>
-                    <div class="principle-text">
-                        <h5>Community Resonance</h5>
-                        <p>Storytelling anchored in lived educator and student experience—empowerment, not corporate tech talk.</p>
-                    </div>
-                </div>
-
-                <div class="format-card" style="margin-top: 1.5rem;">
-                    <h4>Episode Format <span>45 minutes</span></h4>
-                    <div class="format-segments">
-                        <div class="format-segment educate">
-                            <div class="time">0:00 - 15:00</div>
-                            <div class="label">Educate</div>
-                        </div>
-                        <div class="format-segment employ">
-                            <div class="time">15:00 - 30:00</div>
-                            <div class="label">Employ</div>
-                        </div>
-                        <div class="format-segment empower">
-                            <div class="time">30:00 - 45:00</div>
-                            <div class="label">Empower</div>
-                        </div>
-                    </div>
-                </div>
+    <section class="format-section">
+        <div class="format-container">
+            <h2>Every Episode. Three Segments.</h2>
+            <p class="subtitle">45 minutes of insight, action, and inspiration</p>
+            <div class="format-segments">
+                <div class="format-segment"><div class="time">0:00 - 15:00</div><div class="label">Educate</div><div class="desc">Building AI literacy with clear, practical knowledge</div></div>
+                <div class="format-segment"><div class="time">15:00 - 30:00</div><div class="label">Employ</div><div class="desc">Connecting education to workforce opportunities</div></div>
+                <div class="format-segment"><div class="time">30:00 - 45:00</div><div class="label">Empower</div><div class="desc">Centering equity and community voices</div></div>
             </div>
         </div>
-
-        <a href="#episodes" class="scroll-arrow">
-            <span>Scroll</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
-            </svg>
-        </a>
     </section>
-
-    <!-- Episodes Section -->
     <section class="episodes-section" id="episodes">
         <div class="episodes-header">
-            <div>
-                <div class="section-label">Season 1</div>
-                <h2>Episode Guide</h2>
-            </div>
-            <div class="season-badge">
-                <span>8 Episodes</span>
-            </div>
+            <div><div class="section-label">Season 1</div><h2>Episode Guide</h2></div>
+            <div class="season-badge">8 Episodes</div>
         </div>
-
         <div class="episodes-grid">
-            <div class="episode-card" data-episode="1">
-                <div class="episode-meta">
-                    <span class="episode-number">EP 01</span>
-                    <span class="episode-status status-pilot">PILOT</span>
-                </div>
-                <h3>The Future Is Now: Why AI Matters for Every Educator</h3>
-                <div class="guest">Thought Leadership</div>
-                <p>Establishing authority and excitement around AI in education. Why this moment matters for every leader.</p>
-            </div>
-
-            <div class="episode-card">
-                <div class="episode-meta">
-                    <span class="episode-number">EP 02</span>
-                    <span class="episode-status status-coming">COMING</span>
-                </div>
-                <h3>AI 101 for Educators: Myths, Facts & First Steps</h3>
-                <div class="guest">Foundational Episode</div>
-                <p>Building AI literacy and trust through clarity. Demystifying the technology for practitioners.</p>
-            </div>
-
-            <div class="episode-card">
-                <div class="episode-meta">
-                    <span class="episode-number">EP 03</span>
-                    <span class="episode-status status-coming">COMING</span>
-                </div>
-                <h3>Algorithmic Bias and the Black Child</h3>
-                <div class="guest">Equity & Data Ethics Expert</div>
-                <p>Linking AI, equity, and systemic fairness. Who gets left behind when algorithms decide?</p>
-            </div>
-
-            <div class="episode-card">
-                <div class="episode-meta">
-                    <span class="episode-number">EP 04</span>
-                    <span class="episode-status status-coming">COMING</span>
-                </div>
-                <h3>AI Skills That Pay the Bills</h3>
-                <div class="guest">LAEDC Workforce Development</div>
-                <p>Tying K-12 and college AI skills to workforce pipelines. Career pathways that matter.</p>
-            </div>
-
-            <div class="episode-card">
-                <div class="episode-meta">
-                    <span class="episode-number">EP 05</span>
-                    <span class="episode-status status-coming">COMING</span>
-                </div>
-                <h3>Classroom Innovators: AI in Real Schools</h3>
-                <div class="guest">Teacher Panel</div>
-                <p>Spotlighting applied practice and teacher voice. What's actually working in classrooms today.</p>
-            </div>
-
-            <div class="episode-card">
-                <div class="episode-meta">
-                    <span class="episode-number">EP 06</span>
-                    <span class="episode-status status-coming">COMING</span>
-                </div>
-                <h3>Parents, Students & the AI Homefront</h3>
-                <div class="guest">Parent Tech Advocate</div>
-                <p>Expanding reach to families and caregivers. Navigating AI at home and school together.</p>
-            </div>
-
-            <div class="episode-card">
-                <div class="episode-meta">
-                    <span class="episode-number">EP 07</span>
-                    <span class="episode-status status-coming">COMING</span>
-                </div>
-                <h3>Ethics & AI: Should Students Use ChatGPT?</h3>
-                <div class="guest">AI Ethics Professor + Student</div>
-                <p>Engaging in debate and critical reflection. The hard questions educators face daily.</p>
-            </div>
-
-            <div class="episode-card">
-                <div class="episode-meta">
-                    <span class="episode-number">EP 08</span>
-                    <span class="episode-status status-coming">COMING</span>
-                </div>
-                <h3>Season Finale: From Awareness to Action</h3>
-                <div class="guest">Compilation & Highlights</div>
-                <p>Reflect, summarize, and set the stage for Season 2. The ReimagineED movement continues.</p>
-            </div>
+            <div class="episode-card" data-episode="1"><div class="episode-meta"><span class="episode-number">EP 01</span><span class="episode-status status-pilot">PILOT</span></div><h3>The Future Is Now: Why AI Matters for Every Educator</h3><div class="guest">Thought Leadership</div><p>Establishing authority and excitement around AI in education.</p></div>
+            <div class="episode-card"><div class="episode-meta"><span class="episode-number">EP 02</span><span class="episode-status status-coming">COMING</span></div><h3>AI 101 for Educators: Myths, Facts & First Steps</h3><div class="guest">Foundational Episode</div><p>Building AI literacy through clarity and practical guidance.</p></div>
+            <div class="episode-card"><div class="episode-meta"><span class="episode-number">EP 03</span><span class="episode-status status-coming">COMING</span></div><h3>Algorithmic Bias and the Black Child</h3><div class="guest">Equity & Data Ethics Expert</div><p>Linking AI, equity, and systemic fairness.</p></div>
+            <div class="episode-card"><div class="episode-meta"><span class="episode-number">EP 04</span><span class="episode-status status-coming">COMING</span></div><h3>AI Skills That Pay the Bills</h3><div class="guest">LAEDC Workforce Development</div><p>Career pathways from K-12 to workforce.</p></div>
+            <div class="episode-card"><div class="episode-meta"><span class="episode-number">EP 05</span><span class="episode-status status-coming">COMING</span></div><h3>Classroom Innovators: AI in Real Schools</h3><div class="guest">Teacher Panel</div><p>What is actually working in classrooms today.</p></div>
+            <div class="episode-card"><div class="episode-meta"><span class="episode-number">EP 06</span><span class="episode-status status-coming">COMING</span></div><h3>Parents, Students & the AI Homefront</h3><div class="guest">Parent Tech Advocate</div><p>Navigating AI at home and school together.</p></div>
+            <div class="episode-card"><div class="episode-meta"><span class="episode-number">EP 07</span><span class="episode-status status-coming">COMING</span></div><h3>Ethics & AI: Should Students Use ChatGPT?</h3><div class="guest">AI Ethics Professor + Student</div><p>The hard questions educators face daily.</p></div>
+            <div class="episode-card"><div class="episode-meta"><span class="episode-number">EP 08</span><span class="episode-status status-coming">COMING</span></div><h3>Season Finale: From Awareness to Action</h3><div class="guest">Compilation & Highlights</div><p>Setting the stage for Season 2.</p></div>
         </div>
-
-        <a href="#hosts" class="scroll-arrow">
-            <span>Scroll</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
-            </svg>
-        </a>
     </section>
-
-    <!-- Hosts Section -->
     <section class="hosts-section" id="hosts">
         <div class="hosts-header">
             <div class="section-label">Your Hosts</div>
-            <h2>Meet the Voices Behind ReimagineED</h2>
+            <h2>Meet the Voices Behind The Right Path</h2>
             <p>Two perspectives, one mission: transforming education through AI with equity at the center.</p>
         </div>
-
         <div class="hosts-grid">
-            <div class="host-card">
-                <div class="host-avatar">WG</div>
-                <div class="host-info">
-                    <h4>Dr. William Gideon</h4>
-                    <div class="role">Co-Host & Education Innovator</div>
-                    <p>A visionary leader in K-12 transformation, Dr. Gideon brings decades of experience navigating change management, policy, and community engagement. He challenges assumptions and centers the student experience in every conversation.</p>
-                </div>
-            </div>
-
-            <div class="host-card">
-                <div class="host-avatar">MM</div>
-                <div class="host-info">
-                    <h4>Dr. Marie Martin</h4>
-                    <div class="role">Co-Host & Instructional Authority</div>
-                    <p>With 25+ years across K-12, higher ed, government, and military contexts, Dr. Martin brings human-centered pedagogy and leadership development expertise. She ensures every episode connects innovation to real classroom impact.</p>
-                </div>
-            </div>
+            <div class="host-card"><div class="host-avatar">WG</div><div class="host-info"><h4>Dr. William Gideon</h4><div class="role">Co-Host & Education Innovator</div><p>A visionary leader in K-12 transformation, Dr. Gideon brings decades of experience navigating change management, policy, and community engagement.</p></div></div>
+            <div class="host-card"><div class="host-avatar">MM</div><div class="host-info"><h4>Dr. Marie Martin</h4><div class="role">Co-Host & Instructional Authority</div><p>With 25+ years across K-12, higher ed, government, and military contexts, Dr. Martin brings human-centered pedagogy and leadership expertise.</p></div></div>
         </div>
     </section>
-
-    <!-- Footer -->
     <footer>
-        <div class="footer-left">
-            <div class="footer-logo">REIMAGINE<span>ED</span></div>
-            <div class="footer-links">
-                <a href="#about">About</a>
-                <a href="#episodes">Episodes</a>
-                <a href="#hosts">Hosts</a>
-                <a href="#subscribe">Subscribe</a>
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-logo"><img src="assets/the-right-path-logo.png" alt="The Right Path Logo"><span class="footer-logo-text">The Right Path Podcast</span></div>
+                <div class="footer-links"><a href="#pillars">About</a><a href="#episodes">Episodes</a><a href="#hosts">Hosts</a><a href="#subscribe">Subscribe</a></div>
             </div>
-        </div>
-        <div class="footer-right">
-            <div class="social-links">
-                <a href="#" aria-label="LinkedIn">
-                    <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-                </a>
-                <a href="#" aria-label="X/Twitter">
-                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                </a>
-                <a href="#" aria-label="Instagram">
-                    <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
-                </a>
-                <a href="#" aria-label="YouTube">
-                    <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                </a>
-            </div>
-            <div class="branding">
-                A <strong>The Right Path</strong> Production
+            <div class="footer-right">
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
+                    <a href="#" aria-label="X/Twitter"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                    <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg></a>
+                    <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                </div>
+                <div class="copyright">2025 The Right Path Educational Consulting</div>
             </div>
         </div>
     </footer>
-
-    <audio id="audioPlayer" preload="metadata">
-        <source src="assets/TheRightPath_Episode_Mixed.mp3" type="audio/mpeg">
-    </audio>
-
+    <audio id="audioPlayer" preload="metadata"><source src="assets/TheRightPath_Episode_Mixed.mp3" type="audio/mpeg"></audio>
     <script>
-        const audio = document.getElementById('audioPlayer');
-        const playBtn = document.getElementById('playBtn');
-        const playIcon = document.getElementById('playIcon');
-        const progressBar = document.getElementById('progressBar');
-        const progressFill = document.getElementById('progressFill');
-        const currentTimeEl = document.getElementById('currentTime');
-        const durationEl = document.getElementById('duration');
-
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs.toString().padStart(2, '0')}`;
-        }
-
-        audio.addEventListener('loadedmetadata', () => {
-            durationEl.textContent = formatTime(audio.duration);
-        });
-
-        audio.addEventListener('timeupdate', () => {
-            const progress = (audio.currentTime / audio.duration) * 100;
-            progressFill.style.width = `${progress}%`;
-            currentTimeEl.textContent = formatTime(audio.currentTime);
-        });
-
-        audio.addEventListener('ended', () => {
-            playBtn.classList.remove('playing');
-            playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
-        });
-
-        playBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-                playBtn.classList.add('playing');
-                playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-            } else {
-                audio.pause();
-                playBtn.classList.remove('playing');
-                playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
-            }
-        });
-
-        progressBar.addEventListener('click', (e) => {
-            const rect = progressBar.getBoundingClientRect();
-            const percent = (e.clientX - rect.left) / rect.width;
-            audio.currentTime = percent * audio.duration;
-        });
-
-        // Episode card interactions
-        document.querySelectorAll('.episode-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const status = this.querySelector('.episode-status');
-                if (status && status.classList.contains('status-pilot')) {
-                    if (audio.paused) {
-                        audio.play();
-                        playBtn.classList.add('playing');
-                        playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-                    }
-                    // Scroll to player
-                    document.querySelector('.audio-player').scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            });
-        });
-
-        // Smooth scroll for nav links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
+        const audio=document.getElementById('audioPlayer'),playBtn=document.getElementById('playBtn'),playIcon=document.getElementById('playIcon'),progressBar=document.getElementById('progressBar'),progressFill=document.getElementById('progressFill'),currentTimeEl=document.getElementById('currentTime'),durationEl=document.getElementById('duration');
+        function formatTime(s){const m=Math.floor(s/60),sec=Math.floor(s%60);return m+':'+sec.toString().padStart(2,'0')}
+        audio.addEventListener('loadedmetadata',()=>{durationEl.textContent=formatTime(audio.duration)});
+        audio.addEventListener('timeupdate',()=>{progressFill.style.width=(audio.currentTime/audio.duration)*100+'%';currentTimeEl.textContent=formatTime(audio.currentTime)});
+        audio.addEventListener('ended',()=>{playBtn.classList.remove('playing');playIcon.innerHTML='<path d="M8 5v14l11-7z"/>'});
+        playBtn.addEventListener('click',()=>{if(audio.paused){audio.play();playBtn.classList.add('playing');playIcon.innerHTML='<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';}else{audio.pause();playBtn.classList.remove('playing');playIcon.innerHTML='<path d="M8 5v14l11-7z"/>';}});
+        progressBar.addEventListener('click',e=>{const rect=progressBar.getBoundingClientRect();audio.currentTime=((e.clientX-rect.left)/rect.width)*audio.duration});
+        document.querySelectorAll('.episode-card').forEach(card=>{card.addEventListener('click',function(){const s=this.querySelector('.episode-status');if(s&&s.classList.contains('status-pilot')){if(audio.paused){audio.play();playBtn.classList.add('playing');playIcon.innerHTML='<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';}document.querySelector('.audio-player').scrollIntoView({behavior:'smooth',block:'center'})}})});
+        document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'})})});
+        const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}})},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+        document.querySelectorAll('.pillar-card,.episode-card,.host-card').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity .6s ease-out,transform .6s ease-out';obs.observe(el)});
     </script>
 </body>
 </html>
