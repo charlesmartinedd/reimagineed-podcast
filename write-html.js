@@ -1,0 +1,1 @@
+const fs = require("fs"); const html = fs.readFileSync("new-design.html", "utf8"); fs.writeFileSync("index.html", html); console.log("Done");
